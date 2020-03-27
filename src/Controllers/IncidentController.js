@@ -6,11 +6,12 @@ module.exports = {
     const { page = 1} = req.query;
 
     const [count] = await connection('incidents').count();
+
     const incidents = await connection('incidents')
     .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
     .limit(5)
     .offset((page -1) * 5)
-    .select(['incidents.*', 'ongs.name', 'ongs.email', 'ongs.whatsap', 'ongs.city', 'ongs.city']) ;
+    .select(['incidents.*', 'ongs.name', 'ongs.email', 'ongs.whatsapp', 'ongs.city', 'ongs.city', 'ongs.uf']) ;
 
     res.header("X-Total-Count", count['count(*)']);
     return res.json(incidents);
@@ -20,6 +21,8 @@ module.exports = {
     const { title, value, description } = req.body;
 
     const ong_id = req.headers.authorization;
+    console.log(title);
+
 
    const [id] = await connection('incidents').insert({
       title,
