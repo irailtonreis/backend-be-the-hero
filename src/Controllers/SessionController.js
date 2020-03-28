@@ -2,9 +2,8 @@ const connection = require('../database/connection');
 
 module.exports = {
   async create (req, res){
-    const { id, teste } = req.body;
+    const { id } = req.body;
 
-    console.log(teste);
     const ong = await connection('ongs')
     .where('id', id)
     .select('name')

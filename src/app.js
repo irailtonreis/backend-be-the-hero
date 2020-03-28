@@ -12,3 +12,4 @@ app.use(errors());
 
 app.listen(3334);
 
+module.exports = app;

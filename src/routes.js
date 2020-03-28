@@ -8,7 +8,11 @@ const ProfileController = require('./Controllers/ProfileController');
 const SessionController = require('./Controllers/SessionController');
 
 
-routes.post('/sessions', SessionController.create);
+routes.post('/sessions',celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    id: Joi.string().required().min(8),
+  })
+}), SessionController.create);
 
 routes.get('/ongs', OngController.index);
 
@@ -16,7 +20,7 @@ routes.post('/ongs', celebrate({
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().required(),
     email: Joi.string().required().email(),
-    whatsapp: Joi.number().required().min(10),
+    whatsapp: Joi.string().required().min(10).max(11),
     city: Joi.string().required(),
     uf: Joi.string().required().length(2),
   })
@@ -28,7 +32,18 @@ routes.get('/incidents', celebrate({
   })
 }),  IncidentController.index);
 
-routes.post('/incidents', IncidentController.create);
+routes.post('/incidents', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
+
+  [Segments.BODY]: Joi.object().keys({
+    title: Joi.string().required().min(15),
+    description: Joi.string().required(),
+    value: Joi.number().required().min(2),
+  }),
+  
+}), IncidentController.create);
 
 routes.delete('/incidents/:id', celebrate({
     [Segments.PARAMS]: Joi.object().keys({
