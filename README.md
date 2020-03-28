@@ -20,4 +20,4 @@ A aplicação visa conectar ONGs a pessoas que tenham interesse em ajudar fazend
 - Jest
 
 ## Front-End - acesse a versão web 
-[Be-the-hero](https://github.com/irailtonreis/frontend-be-te-hero "Be-the-hero")
+[Be-the-hero](https://github.com/irailtonreis/frontend-be-te-hero "https://github.com/irailtonreis/frontend-be-te-hero")
