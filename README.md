@@ -18,7 +18,7 @@ A aplicação visa conectar ONGs a pessoas que tenham interesse em ajudar fazend
 - Knex
 - Cors
 - Jest
-
+- supertest
 ### 1. Registro de Nova Ong
 <img src='/images/create.gif' width='850px'>
 
