@@ -19,9 +19,18 @@ A aplicação visa conectar ONGs a pessoas que tenham interesse em ajudar fazend
 - Cors
 - Jest
 
+### 1. Registro de Nova Ong
+<img src='/images/create.gif' width='850px'>
+
+### 2. Logon 
+<img src='/images/logon.gif' width='850px'>
+
+### 3. Registro de incident 
+<img src='/images/incident.gif' width='850px'>
+
+### 4. Profile ONG
+<img src='/images/profile.gif' width='850px'>
+
+
 ## Front-End - acesse a versão web 
 [https://github.com/irailtonreis/frontend-be-te-hero](https://github.com/irailtonreis/frontend-be-te-hero)
-
-
-### 1. Logon
-<img src='/images/create.gif' width='800px'>
