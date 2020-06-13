@@ -2,10 +2,10 @@ const express = require('express');
 const { celebrate, Segments, Joi } = require('celebrate');
 const routes = express.Router();
 
-const OngController = require('./Controllers/OngController');
-const IncidentController = require('./Controllers/IncidentController');
-const ProfileController = require('./Controllers/ProfileController');
-const SessionController = require('./Controllers/SessionController');
+const OngController = require('./app/Controllers/OngController');
+const IncidentController = require('./app/Controllers/IncidentController');
+const ProfileController = require('./app/Controllers/ProfileController');
+const SessionController = require('./app/Controllers/SessionController');
 
 
 routes.post('/sessions',celebrate({
@@ -59,4 +59,4 @@ routes.get('/profile', celebrate({
 }), ProfileController.index);
 
 
-module.exports = routes;
+export default routes;
