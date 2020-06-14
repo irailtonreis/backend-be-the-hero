@@ -6,7 +6,10 @@ class Ong extends Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
-        password: Sequelize.VIRTUAL,
+        // password: Sequelize.VIRTUAL,
+        whatsapp: Sequelize.STRING,
+        city: Sequelize.STRING,
+        uf: Sequelize.STRING,
         password_hash: Sequelize.STRING,
       },
       {
@@ -14,9 +17,9 @@ class Ong extends Model {
       }
     );
 
-    this.addHook('beforeSave', async user => {
-      if (user.password) {
-        user.password_hash = await bcrypt.hash(user.password, 8);
+    this.addHook('beforeSave', async ong => {
+      if (ong.password) {
+        ong.password_hash = await bcrypt.hash(ong.password, 8);
       }
     });
 
