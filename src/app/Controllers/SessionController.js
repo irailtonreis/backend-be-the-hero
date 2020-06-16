@@ -1,18 +1,22 @@
-// const connection = require('../database/connection');
+import Ong from '../models/Ong';
+class Session {
+  async create (req, res){
+  
+    const { email, password } = req.body;
 
-// module.exports = {
-//   async create (req, res){
-//     const { id } = req.body;
+    const ong = await Ong.findOne({where: { email }})
 
-//     const ong = await connection('ongs')
-//     .where('id', id)
-//     .select('name')
-//     .first()
+    if(!ong){
+      return res.status(400).json({ error: "ONG não encontrada"})
+    }
 
-//     if(!ong){
-//       return res.status(400).json({ error: "No ONG found with this ID"})
-//     }
+    if(!(await ong.checkPassword(password))){
+      return res.status(401).json({error: 'Senha inválida'})
+    }
 
-//     return res.json(ong); 
-//   }
-// }
+    return res.json(ong); 
+  }
+}
+
+
+export default new Session();

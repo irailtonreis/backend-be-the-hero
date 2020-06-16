@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
+import bcrypt from 'bcryptjs';
 
 class Ong extends Model {
   static init(sequelize) {
@@ -6,7 +7,7 @@ class Ong extends Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
-        // password: Sequelize.VIRTUAL,
+        password: Sequelize.VIRTUAL,
         whatsapp: Sequelize.STRING,
         city: Sequelize.STRING,
         uf: Sequelize.STRING,
@@ -22,11 +23,12 @@ class Ong extends Model {
         ong.password_hash = await bcrypt.hash(ong.password, 8);
       }
     });
-
     return this;
   }
 
-
+  checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash);
+  }
 }
 
 export default Ong;

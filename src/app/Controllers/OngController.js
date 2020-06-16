@@ -1,12 +1,18 @@
 import Ong from '../models/Ong';
-module.exports = {
+class OngController {
 
-  async create (req, res){
-    console.log(req.body)
+  async store(req, res){
+
+    const emailExists = await Ong.findOne({ where:{ email: req.body.email }})
+
+    if(emailExists){
+      return res.status(401).json({error: "Email já existe"})
+    } 
+
     const ong = await Ong.create(req.body);
 
     return res.json(ong);
-  },
+  }
 
   async index(req, res) {
     const ongs = await Ong.findAll();
@@ -16,3 +22,5 @@ module.exports = {
 
 
 }
+
+export default new OngController();

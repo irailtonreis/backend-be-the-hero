@@ -1,13 +1,33 @@
+import 'dotenv/config';
+
 const express = require('express');
-const { errors } = require('celebrate');
+import { errors } from 'celebrate';
 import routes from './routes';
-const cors = require('cors');
+import cors from 'cors';
 
-const app = express();
+import './database';
 
-app.use(cors())
-app.use(express.json());
-app.use(routes);
-app.use(errors());
+class App {
+  constructor() {
+    this.server = express();
+    this.middlewares();
+    this.routes();
+  }
 
-export default app;
+  middlewares() {
+    this.server.use(cors());
+    this.server.use(express.json());
+    // this.server.use(
+    //   '/files',
+    //   express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
+    // );
+  }
+
+  routes() {
+    this.server.use(routes);
+    this.server.use(errors());
+  }
+
+}
+
+export default new App().server;
