@@ -2,13 +2,9 @@ import Ong from '../models/Ong';
 
 class ProfileController{
   async index (req, res){
-    const ong_id = req.headers.authorization;
+    const ong = await Ong.findByPk(req.userId)
 
-    const incidents = await connection('incidents')
-    .where('ong_id', ong_id)
-    .select('*')
-
-    return res.json(incidents);
+    return res.json(ong);
   }
 }
 

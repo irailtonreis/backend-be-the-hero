@@ -1,4 +1,6 @@
+import jwt from 'jsonwebtoken';
 import Ong from '../models/Ong';
+import authConfig from '../../config/auth';
 class Session {
   async create (req, res){
   
@@ -14,7 +16,22 @@ class Session {
       return res.status(401).json({error: 'Senha inválida'})
     }
 
-    return res.json(ong); 
+    const { id, name, whatsapp, city, uf } = ong;
+
+
+    return res.json({
+      ong: {
+        id,
+      name,
+      email,
+      whatsapp,
+      city,
+      uf
+      },
+      token: jwt.sign({id}, authConfig.secret, {
+        expiresIn: authConfig.expiresIn
+      }) 
+    }); 
   }
 }
 

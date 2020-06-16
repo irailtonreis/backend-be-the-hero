@@ -1,10 +1,12 @@
 import { Router } from 'express';
-const { celebrate, Segments, Joi } = require('celebrate');
+import { celebrate, Segments, Joi } from 'celebrate'
 const routes = new Router();
 
+import authMiddlewre from './app/middleware/auth';
 
 import OngController from './app/Controllers/OngController';
 import SessionController from './app/Controllers/SessionController';
+import ProfileController from './app/Controllers/ProfileController';
 
 
 routes.post('/sessions',celebrate({
@@ -54,12 +56,8 @@ routes.post('/ongs', celebrate({
 //     })
 // }),  IncidentController.delete);
 
-
-// routes.get('/profile', celebrate({
-//   [Segments.HEADERS]: Joi.object({
-//     authorization: Joi.string().required(),
-//   }).unknown(),
-// }), ProfileController.index);
+routes.use(authMiddlewre);
+routes.get('/profile', ProfileController.index);
 
 
 export default routes;
