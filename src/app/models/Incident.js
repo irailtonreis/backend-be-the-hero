@@ -7,6 +7,7 @@ class Incident extends Model {
       {
         title: Sequelize.STRING,
         description: Sequelize.STRING,
+        value: Sequelize.STRING,
       },
       {
         sequelize,

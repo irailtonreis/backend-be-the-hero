@@ -26,6 +26,13 @@ class Ong extends Model {
     return this;
   }
 
+  static associate(models) {
+    this.hasMany(models.Incident, {
+      foreignKey: 'ong_id',
+      as: 'ong',
+    });
+  }
+
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);
   }

@@ -15,6 +15,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      value: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
       ong_id: {
         type: Sequelize.INTEGER,
         references: { model: 'ongs', key: 'id'},
