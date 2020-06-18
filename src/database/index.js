@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 
-
 import Ong from '../app/models/Ong';
 import Incident from '../app/models/Incident';
+import File from '../app/models/File';
 
 import databaseConfig from '../config/database';
 
-const models = [Ong, Incident];
+const models = [Ong, Incident, File];
 
 class Database {
   constructor() {

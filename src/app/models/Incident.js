@@ -1,6 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
 
-
 class Incident extends Model {
   static init(sequelize) {
     super.init(
@@ -16,6 +15,12 @@ class Incident extends Model {
     return this;
   }
 
+  static associate(models) {
+    this.belongsTo(models.File, {
+      foreignKey: 'file_id',
+      as: 'foto',
+    });
+  }
 }
 
 export default Incident;

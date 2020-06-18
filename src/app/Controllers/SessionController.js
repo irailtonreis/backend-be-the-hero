@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+  import jwt from 'jsonwebtoken';
 import Ong from '../models/Ong';
 import authConfig from '../../config/auth';
 class Session {

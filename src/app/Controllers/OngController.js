@@ -15,7 +15,9 @@ class OngController {
   }
 
   async index(req, res) {
-    const ongs = await Ong.findAll();
+    const ongs = await Ong.findAll({
+      attributes: ['name','email', 'whatsapp', 'city', 'uf'],
+    });
   
     return res.json(ongs);
   }

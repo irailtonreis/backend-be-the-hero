@@ -25,38 +25,42 @@ class IncidentController {
   }
 
   async create (req, res){
-    const { title, value, description } = req.body;
+    const { title, value, description, file_id } = req.body;
 
     const ong_id = req.userId;
+    console.log(file_id);
 
     const incident = await Incident.create({
       title,
       description,
       value,
       ong_id,
+      file_id,
     })
 
     return res.json(incident);
   }
-  
-  // async delete(req, res){
-  //   const { id } = req.params;
-  //   const ong_id = req.headers.authorization;
 
-  //   const incident = await connection('incidents')
-  //   .where('id', id)
-  //   .select('ong_id')
-  //   .first()
+  async delete(req, res){
+    const { id } = req.params;
 
-  //   if(incident.ong_id !== ong_id){
-  //     return res.status(401).json({error: "Operation not permmitted"});
+    const incident = await Incident.findOne({
+      where: { id }
+    })
+
+    console.log(incident.ong_id)
+    console.log(req.userId)
     
-  //   }
+    if(incident.ong_id !== req.userId){
+      return res.status(401).json({error: "Operação não permintida"});
+    }
 
-  //   await connection('incidents').where('id', id).delete();
+    return res.json(incident)
 
-  //   return res.status(204).send();
-  // }
+    // await connection('incidents').where('id', id).delete();
+
+    // return res.status(204).send();
+  }
 
  
   
