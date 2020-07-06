@@ -37,7 +37,14 @@ routes.post('/ongs', celebrate({
 }) , OngController.store);
 
 
-routes.post('/files', upload.single('file'), FileController.create)
+routes.post('/files', upload.single('file'), FileController.create);
+
+routes.get('/incidents', celebrate({
+  [Segments.QUERY]: Joi.object().keys({
+    page: Joi.number(),
+  })
+}),  IncidentController.index);
+
 
 routes.use(authMiddlewre);
 routes.get('/profile', ProfileController.index);
@@ -55,13 +62,6 @@ routes.post('/incidents', celebrate({
   }),
   
 }), IncidentController.create);
-
-routes.get('/incidents', celebrate({
-  [Segments.QUERY]: Joi.object().keys({
-    page: Joi.number(),
-  })
-}),  IncidentController.index);
-
 
 routes.delete('/incidents/:id', celebrate({
   [Segments.PARAMS]: Joi.object().keys({

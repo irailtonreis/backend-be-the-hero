@@ -19,6 +19,12 @@ A aplicação visa conectar ONGs a pessoas que tenham interesse em ajudar fazend
 - Cors
 - Jest
 - supertest
+
+## Instalar bando de dados postrgres através do docker
+```sh
+ docker run --name bethehero -e POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
+```
+
 ### 1. Registro de Nova Ong
 <img src='/images/create.gif' width='850px'>
 

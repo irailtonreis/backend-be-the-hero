@@ -6,7 +6,6 @@ class IncidentController {
     const { page = 1} = req.query;
 
     const incidents = await Incident.findAll({
-      where: { ong_id: req.userId },
       limit: 5,
       offset: (page - 1) * 5,
     })
