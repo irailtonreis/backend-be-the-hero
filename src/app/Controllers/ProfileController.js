@@ -1,4 +1,4 @@
-import Ong from '../models/Ong';
+import File from '../models/File';
 import Incident from '../models/Incident';
 
 class ProfileController{
@@ -7,6 +7,12 @@ class ProfileController{
       where: {
         ong_id: req.userId,
       },
+      include: [{
+        model: File,
+        as: 'foto',
+        attributes: ['id', 'path', 'url'],
+      }
+      ],
     })
 
     return res.json(ong);
