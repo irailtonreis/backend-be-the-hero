@@ -20,6 +20,12 @@ class File extends Model {
     );
     return this;
   }
+  static associate(models) {
+    this.belongsTo(models.Incident, {
+      foreignKey: 'file_id',
+      as: 'foto',
+    });
+  }
 }
 
 export default File;

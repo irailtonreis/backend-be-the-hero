@@ -1,4 +1,5 @@
 import Incident from '../models/Incident';
+import File from '../models/File';
 
 class IncidentController {
 
@@ -6,8 +7,15 @@ class IncidentController {
     const { page = 1} = req.query;
 
     const incidents = await Incident.findAll({
+      include: [{
+        model: File,
+        as: 'foto',
+        attributes: ['id', 'path', 'url'],
+      }
+      ],
       limit: 5,
       offset: (page - 1) * 5,
+      
     })
 
     // const [count] = await connection('incidents').count();
@@ -27,7 +35,6 @@ class IncidentController {
     const { title, value, description, file_id } = req.body;
 
     const ong_id = req.userId;
-    console.log(file_id);
 
     const incident = await Incident.create({
       title,
@@ -47,18 +54,14 @@ class IncidentController {
       where: { id }
     })
 
-    console.log(incident.ong_id)
-    console.log(req.userId)
-    
     if(incident.ong_id !== req.userId){
       return res.status(401).json({error: "Operação não permintida"});
     }
 
-    return res.json(incident)
+    await incident.destroy();
 
-    // await connection('incidents').where('id', id).delete();
+    return res.send();
 
-    // return res.status(204).send();
   }
 
  
