@@ -1,5 +1,6 @@
 import Incident from '../models/Incident';
 import File from '../models/File';
+import Ong from '../models/Ong';
 
 class IncidentController {
 
@@ -7,12 +8,18 @@ class IncidentController {
     const { page = 1} = req.query;
 
     const incidents = await Incident.findAll({
+      attributes: ['id', 'title', 'description', 'value'], 
       include: [{
+        model: Ong, 
+        as: 'ong',
+        attributes: ['id', 'email', 'name', 'city', 'uf', 'whatsapp'],
+      },{
         model: File,
         as: 'foto',
         attributes: ['id', 'path', 'url'],
       }
-      ],
+
+    ],
       limit: 5,
       offset: (page - 1) * 5,
       

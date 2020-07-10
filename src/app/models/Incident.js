@@ -20,6 +20,11 @@ class Incident extends Model {
       foreignKey: 'file_id',
       as: 'foto',
     });
+
+    this.belongsTo(models.Ong, {
+      foreignKey: 'ong_id',
+      as: 'ong',
+    });
   }
 }
 
